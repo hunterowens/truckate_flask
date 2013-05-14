@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block sidebar %}
+    {% for location in locs %}
+    <li><a href="#{{ location }}">{{ location }}</a></li>
+    {% endfor %}
+{% endblock %}
+
+{% block content %}
+    {% for location in locs %}
+    <h3> <a name="{{ location }}"> {{ location }} </a></h3>
+        <hr />
+        {% for bath in baths if bath.location == location %}
+        <a href="{{ url_for('show_bath', bath=bath.id) }}"> {{ bath.floor }}, {{ bath.gender.value }}</a>
+        {% endfor %}
+    {% endfor %}
+{% endblock %}

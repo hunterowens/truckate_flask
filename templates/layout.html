@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bathroom Connoisseur</title>
+	<meta name="viewport" content="width=device-width, initial-scale=2.0" />
+	<link href="../static/css/bootstrap.css" rel="stylesheet" media="screen" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+    </style>
+</head>
+<body> 
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container-fluid">
+                <ul class="nav">
+                    <li><a href="{{ url_for('index') }}"> BroStomp Bathrooms</a></li>
+                    <li><a href="/list">List of Bathrooms & Reviews</a></li>
+                    <li><a href="/addReview">Add a Review</a></li>
+                    <li><a href="/addBath">Add a Bathroom</a></li>
+            </div>
+        </div>
+    </div>
+	<div class="container-fluid">
+		<div class="row-fluid">
+            <div id="sidebar" class="span2">
+                <div class="well sidebar-nav">
+                    <ul class="nav nav-list">
+                        {% block sidebar %}{% endblock %}
+                    </ul>
+                </div>
+            </div>
+            <div id="content" class="span10">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+    <script src="http://code.jquery.com/jquery.js" />
+    <script src="../static/js/bootstrap.js" type="text/javascript" />
+</body>
+</html>

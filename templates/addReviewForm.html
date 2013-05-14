@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+{% block sidebar %}
+    
+{% endblock %}
+
+{% block content %}
+    <h2>Add A Review</h2>
+    <form class="form-horizontal">
+    <div class="control-group">
+        <label class="control-label" >Location</label>
+        <div class="controls">
+             <select id="bathroom">
+                <option>A</option>
+            </select>
+        </div>
+    </div>
+     <div class="control-group">
+        <label class="control-label" >Score</label>
+        <div class="controls">
+             <select id="rating">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+        </div>
+    </div>
+    <div class="control-group">
+     <label class="control-label">Review</label>
+        <div class="controls">
+             <textarea id="content" rows="3"></textarea>
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <button class="btn" type="button" id="submit">Submit!</button>
+        </div>
+    </div>
+    </form>
+    <script>
+        $(document).ready(function(){
+            $('#submit').click(function() {
+                var bathroom = $('#bathroom').val();
+                var rating = $('#rating').val();
+                var content = $('#content').val();
+                var review = new Object();
+                review.bathroom = bathroom;
+                review.rating = rating;
+                review.content = content;
+                var reviewjson = JSON.stringify(review);
+                $.ajax('/addReview', {
+                    data: review,
+                    type: 'POST',
+                    processData: false,
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success:function(resp) {
+                        alert("Succes: Now Go Review the Bathroom");
+                    },
+                    error:function(xhr, textStatus, errorThrown){
+                        alert("Success: Now write a review");
+                        window.location = '/list';
+                    }            
+                });
+            });
+    });
+    </script>
+{% endblock %}

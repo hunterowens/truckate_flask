@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block sidebar %}
+    {% for review in reviews %}
+        <li><a href="#{{ review.id }}">{{ review.id }}</a></li>
+    {% endfor %}
+{% endblock sidebar %}
+
+{% block content %}
+    {% for review in reviews %}
+        <div class="hero-unit">
+            <h3> {{ review.rating }} </h3>
+            <p> {{ review.content }} </p>
+        </div>
+    {% endfor %}
+{% endblock content %}
