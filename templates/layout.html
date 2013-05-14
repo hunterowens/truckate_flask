@@ -9,15 +9,15 @@
     <meta name="author" content="Hunter Owens, Shuwen Qian, Alex Nichols and Michael Victor Zink">
 
     <!-- Le styles -->
-    <link href="./css/bootstrap.css" rel="stylesheet">
+    <link href="../static/css/bootstrap.css" rel="stylesheet">
     <style type="text/css">
       body {
         padding-top: 60px;
         padding-bottom: 40px;
       }
     </style>
-    <link href="./static/css/bootstrap-responsive.css" rel="stylesheet">
-    <link href="./static/css/style.css" rel="stylesheet">
+    <link href="../static/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="../static/css/style.css" rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -55,21 +55,7 @@
     <div class="container">
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="hero-unit">
-        <h1>Truckate</h1>
-        <p>Truckate is bringing lunch into the 21st Century. Better, Faster, Tastier. Get ready to lunch, Chicago.</p>
-        <!-- Begin MailChimp Signup Form -->
-      <div id="mc_embed_signup">
-          <form action="http://truckate.us6.list-manage.com/subscribe/post?u=efd751a227&amp;id=ca5d6a9dfa" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                <input type="text" value="" name="FNAME" class="required" id="mce-FNAME" placeholder="first name">
-                <input type="text" value="" name="LNAME" class="required" id="mce-LNAME" placeholder="last name">
-                <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
-            <div class="clear">
-              <input type="submit" value="Sign up for Beta" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary btn-large">
-            </div>
-          </form>
-      </div>
-
-<!--End mc_embed_signup-->
+        {% block content %}{% endblock %}
       </div>
       <footer>
         <p>&copy; Truckate 2013</p>
@@ -80,20 +66,20 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="./js/bootstrap.min.js"></script>
-    <script src="./js/jquery.js"></script>
-    <script src="./js/bootstrap-transition.js"></script>
-    <script src="./js/bootstrap-alert.js"></script>
-    <script src="./js/bootstrap-modal.js"></script>
-    <script src="./js/bootstrap-dropdown.js"></script>
-    <script src="./js/bootstrap-scrollspy.js"></script>
-    <script src="./js/bootstrap-tab.js"></script>
-    <script src="./js/bootstrap-tooltip.js"></script>
-    <script src="./js/bootstrap-popover.js"></script>
-    <script src="./js/bootstrap-button.js"></script>
-    <script src="./js/bootstrap-collapse.js"></script>
-    <script src="./js/bootstrap-carousel.js"></script>
-    <script src="./js/bootstrap-typeahead.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="../static/js/jquery.js"></script>
+    <script src="../static/js/bootstrap-transition.js"></script>
+    <script src="../static/js/bootstrap-alert.js"></script>
+    <script src="../static/js/bootstrap-modal.js"></script>
+    <script src="../static/js/bootstrap-dropdown.js"></script>
+    <script src="../static/js/bootstrap-scrollspy.js"></script>
+    <script src="../static/js/bootstrap-tab.js"></script>
+    <script src="../static/js/bootstrap-tooltip.js"></script>
+    <script src="../static/js/bootstrap-popover.js"></script>
+    <script src="../static/js/bootstrap-button.js"></script>
+    <script src="../static/js/bootstrap-collapse.js"></script>
+    <script src="../static/js/bootstrap-carousel.js"></script>
+    <script src="../static/js/bootstrap-typeahead.js"></script>
 
   </body>
 </html>
@@ -101,22 +87,3 @@
 
 
 
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Stripe</title>
-  <style type="text/css" media="screen">
-    form article label {
-      display: block;
-      margin: 5px;
-    }
-
-    form .submit {
-      margin: 15px 0;
-    }
-  </style>
-</head>
-<body>
-  {% block content %}{% endblock %}
-</body>
-</html>
