@@ -1,6 +1,7 @@
 import os
 from flask import Flask, render_template, request
 import stripe
+from auth import requires_auth
 
 stripe_keys = {
     'secret_key': os.environ['SECRET_KEY'],
@@ -15,6 +16,7 @@ app = Flask(__name__)
 def index():
     return render_template('index.html', key=stripe_keys['publishable_key'])
 
+@requires_auth
 @app.route('/charge', methods=['POST'])
 def charge():
     # Amount in cents
