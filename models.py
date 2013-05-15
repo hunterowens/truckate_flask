@@ -12,10 +12,10 @@ session = Session()
 Base = declarative_base()
 
 
-association_table = Table('Orders_Items', Base.metadata,
-        Column('order_id', Integer, ForeignKey('orders.id')),
-        Column('item_id', Integer, ForeignKey('items.id'))
-)
+#association_table = Table('Orders_Items', Base.metadata,
+ #       Column('order_id', Integer, ForeignKey('orders.id')),
+ #       Column('item_id', Integer, ForeignKey('items.id'))
+#)
 
 class User(Base):
         __tablename__ = 'users'
@@ -33,6 +33,7 @@ class Operator(Base):
         password = Column(String(200))
         phone = Column(String(20))
         open = Column(Boolean)
+        location = Column(String(50))
         name = Column(String(200))
 
 class Item(Base):
@@ -45,15 +46,7 @@ class Item(Base):
         operator_id = Column(Integer, ForeignKey('operators.id'))
         operator = relationship("Operator",backref=backref('item',order_by=id))
 
-class Order(Base):
-        __tablename__ = 'orders'
-        id = Column(Integer,primary_key=True)
-        active = Column(Boolean)
-        due = Column(DateTime)
-        operator_id = Column(Integer, ForeignKey('operators.id'))
-        operator = relationship("Operator",backref=backref('item',order_by=id))
-        items = relationship("Items",
-                    secondary=association_table)
+
 
 
 
