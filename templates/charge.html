@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
 {% block content %}
-  <h2>Thanks, you payed <strong>$5.00</strong>!</h2>
+  <h2>Thanks, you payed <strong>${{amount / 100}}</strong>!</h2>
+  <p>Just say 'I'm [Name] and I order on Truckate' when you get to the Truck</p>
 {% endblock %}

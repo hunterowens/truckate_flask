@@ -51,6 +51,12 @@ class Order(Base):
         user_id = Column(Integer,ForeignKey('users.id'))
         #status options: created, paid, completed
         status = Column(String(200))
+        def total_amount(self):
+            amount = 50
+            for oi in self.order_item:
+                amount += oi.item.price
+            return int(amount)
+
 
 class OrderItems(Base):
         __tablename__ = 'order_items'

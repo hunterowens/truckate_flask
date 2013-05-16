@@ -7,7 +7,9 @@
   		{% for item in order.order_item %}
   			<div>{{item.item.name}}</div>
   		{% endfor %}
+  	<label for="served">Served?</label><input type="checkbox" value="{{order.id}}" name="served"></input> 
   	</div>
   	{% endfor %}
+  	<button type="submit" class="btn">Submit</button>
   </form>
 {% endblock %}
