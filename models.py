@@ -46,7 +46,21 @@ class Item(Base):
         operator_id = Column(Integer, ForeignKey('operators.id'))
         operator = relationship("Operator",backref=backref('item',order_by=id))
 
+class Order(Base):
+        __tablename__ = 'orders'
+        id = Column(Integer,primary_key=True)
+        operator = relationship("Operator",backref=backref('order',order_by=id))
+        operator_id = Column(Integer, ForeignKey('operators.id'))
+        user = relationship("User",backref=backref('order',order_by=id))
+        user_id = Column(Integer,ForeignKey('users.id'))
 
+class OrderItems(Base):
+        __tablename__ = 'order_items'
+        id = Column(Integer,primary_key=True)
+        order = relationship("Order",backref=backref('order_item',order_by=id))
+        item = relationship("Item",backref=backref('order_item',order_by=id))
+        order_id = Column(Integer, ForeignKey('orders.id'))
+        item_id = Column(Integer,ForeignKey('items.id'))
 
 
 
