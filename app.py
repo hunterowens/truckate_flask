@@ -7,7 +7,7 @@ from auth import requires_auth
 from sqlalchemy import *
 from sqlalchemy.orm import *
 from sqlalchemy.ext.declarative import *
-from models import User, Operator, Item
+from models import User, Operator, Item, Order, OrderItems
 
 
 
@@ -33,8 +33,6 @@ def checkout():
 @app.route('/charge', methods=['POST'])
 def charge():
     # Amount in cents
-    amount = 500
-
     customer = stripe.Customer.create(
         email='customer@example.com',
         card=request.form['stripeToken']
@@ -44,22 +42,46 @@ def charge():
         customer=customer.id,
         amount=amount,
         currency='usd',
-        description='Flask Charge'
+        description='Truckate Order'
     )
 
     return render_template('charge.html', amount=amount)
 
-@app.route('/truck/<truck>')
+
+@app.route('/truck/<truck>',methods=['GET','POST'])
 def truck_page(truck):
-    items = session.query(Item).filter(Item.operator_id==truck).all()
-    return render_template('truckPage.html', items = items)
+    items = session.query(Item).filter(Item.operator_id==truck)
+    if request.method == 'POST':
+        user = User()
+        user.firstName = request.form.get('firstName')
+        user.lastName = request.form.get('lastName')
+        user.email = request.form.get('email')
+        session.add(user)
+        session.commit()
+        order = Order()
+        order.operator_id = truck
+        order.user = user
+        order.status = 'created'
+        session.add(order)
+        session.commit()
+        amount = 0
+        for item_id in request.form.getlist('item'):
+            orderitem = OrderItems()
+            orderitem.order_id = order.id
+            orderitem.item_id = item_id
+            item = items.filter(Item.id == item_id).first()
+            amount += item.price
+            session.add(orderitem)
+            session.commit()
+        amount += 50
+        return render_template('checkout.html',items = items.all())
+    else:
+        return render_template('truckPage.html', items = items.all())
 
 #index
 @app.route('/index')
 def index():
     operators = [instance for instance in session.query(Operator)]
-    print operators
-    print operators[0]
     return render_template('index.html',trucks = operators)
 
 if __name__ == '__main__':

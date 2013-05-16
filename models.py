@@ -12,10 +12,6 @@ session = Session()
 Base = declarative_base()
 
 
-#association_table = Table('Orders_Items', Base.metadata,
- #       Column('order_id', Integer, ForeignKey('orders.id')),
- #       Column('item_id', Integer, ForeignKey('items.id'))
-#)
 
 class User(Base):
         __tablename__ = 'users'
@@ -53,6 +49,8 @@ class Order(Base):
         operator_id = Column(Integer, ForeignKey('operators.id'))
         user = relationship("User",backref=backref('order',order_by=id))
         user_id = Column(Integer,ForeignKey('users.id'))
+        #status options: created, paid, completed
+        status = Column(String(200))
 
 class OrderItems(Base):
         __tablename__ = 'order_items'

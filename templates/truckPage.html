@@ -4,17 +4,21 @@
 Avalible: 
 
 	<form action="" method="post" name="order">
-	  
 	  <fieldset>
 	    <legend>Menu:</legend>
 	    <span class="help-block">Order Away...</span>
 	    {% for item in items %}
 	    <label class="checkbox">
-      		<input type="checkbox">{{ item.name }}, {{ item.desc }}, ${{item.price / 100}}</input>
+      		<input type="checkbox" value="{{item.id}}" name="item">{{ item.name }}, {{ item.desc }}, ${{item.price / 100}}</input>
       	 </label>
     	{% endfor %}
-    </form>
+    	<hr>
 
-     <button type="submit" class="btn">Submit</button>
+    	<label>First Name:</label><input required="true" name="firstName"></input>
+    	<label>Last Name:</label><input required="true" name="lastName"></input>
+    	<label>Email:</label><input required="true" name="email"></input>
+    </form>
+    <br>
+    <button type="submit" class="btn">Submit</button>
 
 {% endblock %}
