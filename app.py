@@ -32,6 +32,7 @@ def checkout(amount):
 
 @app.route('/charge', methods=['POST'])
 def charge():
+    print request.form
     # Amount in cents
     customer = stripe.Customer.create(
         email='customer@example.com',
@@ -77,6 +78,12 @@ def truck_page(truck):
         return render_template('checkout.html',amount = amount)
     else:
         return render_template('truckPage.html', items = items.all())
+
+@app.route('/orders/<truck>')
+def truck_page(truck):
+    open_orders = session.query(Order).filter(Order.status=='paid').all()
+    print open_orders[0].order_item[0].item
+    return render_template('line.html', orders = open_orders)
 
 #index
 @app.route('/index')

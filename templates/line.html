@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block content %}
+
+ <form action="" method="post" name="line">
+  	{% for order in orders %}
+  	<div>Order: Name = {{order.user.firstName}} {{order.user.lastName}} - 
+  		{% for item in order.order_item %}
+  			<div>{{item.item.name}}</div>
+  		{% endfor %}
+  	</div>
+  	{% endfor %}
+  </form>
+{% endblock %}
