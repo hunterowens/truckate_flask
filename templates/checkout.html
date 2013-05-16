@@ -4,13 +4,13 @@
   <form action="/charge" method="post">
     <article>
       <label>
-        <span>Amount is $5.00</span>
+        <span>Thanks for Ordering, please choose your payment method:</span>
       </label>
     </article>
 
     <script src="https://checkout.stripe.com/v2/checkout.js" class="stripe-button"
             data-key="{{ key }}"
-            data-description="A Flask Charge"
-            data-amount="500"></script>
+            data-description="Truckate Order"
+            data-amount="{{amount}}"></script>
   </form>
 {% endblock %}

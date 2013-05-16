@@ -27,8 +27,8 @@ session = SessionMkr()
 app = Flask(__name__)
 # Checkout Stuff
 @app.route('/checkout')
-def checkout():
-    return render_template('checkout.html', key=stripe_keys['publishable_key'])
+def checkout(amount):
+    return render_template('checkout.html', key=stripe_keys['publishable_key'], amount = amount)
 
 @app.route('/charge', methods=['POST'])
 def charge():
@@ -74,7 +74,7 @@ def truck_page(truck):
             session.add(orderitem)
             session.commit()
         amount += 50
-        return render_template('checkout.html',items = items.all())
+        return render_template('checkout.html',amount = amount)
     else:
         return render_template('truckPage.html', items = items.all())
 
