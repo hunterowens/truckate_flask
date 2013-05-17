@@ -82,6 +82,7 @@ def truck_page(truck):
         items = filter(lambda x: x.count > 0, items)
         return render_template('truckPage.html', items = items)
 
+#Truck Admin Stuff
 
 @app.route('/orders/<truck>', methods=['GET','POST'])
 def order_page(truck):
@@ -96,6 +97,12 @@ def order_page(truck):
         return render_template('line.html', orders = open_orders)
     else:
         return render_template('line.html', orders = open_orders)
+
+@app.route('/admin/<truck>',methods=['GET','POST'])
+def admin_page(truck):
+    items = session.query(Item).filter(Item.operator_id==truck).all()
+    operator = session.query(Operator).filter(Operator.id == truck).first()
+    return render_template('truckAdmin.html',items = items,truck = operator)
 
 #index
 @app.route('/')

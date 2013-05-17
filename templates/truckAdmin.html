@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block content %}
+
+ <form action="" method="post" name="line">
+  	<fieldset>
+      <legend>Open Items</legend>
+      {% for item in items %}
+  			<div>{{item.name}}:{{item.count}}</div>
+        <label for="delete">Delete?</label><input type="checkbox" value="{{item.id}}" name="delete"></input> 
+  		{% endfor %}
+    </fieldset>
+    <fieldset>
+      <legend>Truck Info</legend>
+      <label>Open?</label>
+      <input type="checkbox" name="open" value="{{truck.id}}"></input>
+    </fieldset>
+  	<button type="submit" class="btn">Submit</button>
+  </form>
+{% endblock %}
