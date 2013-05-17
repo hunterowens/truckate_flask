@@ -95,7 +95,7 @@ def order_page(truck):
         return render_template('line.html', orders = open_orders)
 
 #index
-@app.route('/index')
+@app.route('/')
 def index():
     operators = [instance for instance in session.query(Operator)]
     return render_template('index.html',trucks = operators)
