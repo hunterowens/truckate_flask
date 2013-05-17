@@ -48,7 +48,7 @@ def charge():
         )
         order.status = 'paid'
         session.commit()
-        return render_template('charge.html', amount=order.total_amount())
+        return render_template('charge.html', amount=order.total_amount(),user = user)
     except stripe.CardError, e:
         render_template('/404.html')
 
