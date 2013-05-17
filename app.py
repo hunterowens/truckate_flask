@@ -34,24 +34,23 @@ def checkout(amount):
 def charge():
     order = session.query(Order).filter(Order.id == int(request.form.get('order'))).first()
     user = session.query(User).filter(User.id == int(request.form.get('user'))).first()
-    print order.id
-    print order.status
-    print user.id
-    print user.email
     # Amount in cents
     customer = stripe.Customer.create(
-        email='customer@example.com',
+        email=user.email,
         card=request.form['stripeToken']
     )
-
-    charge = stripe.Charge.create(
-        customer=customer.id,
-        amount=order.total_amount(),
-        currency='usd',
-        description='Truckate Order'
-    )
-
-    return render_template('charge.html', amount=order.total_amount())
+    try:
+        charge = stripe.Charge.create(
+            customer=customer.id,
+            amount=order.total_amount(),
+            currency='usd',
+            description='Truckate Order'
+        )
+        order.status = 'paid'
+        session.commit()
+        return render_template('charge.html', amount=order.total_amount())
+    except stripe.CardError, e:
+        render_template('/404.html')
 
 
 @app.route('/truck/<truck>',methods=['GET','POST'])
