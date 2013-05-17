@@ -78,7 +78,9 @@ def truck_page(truck):
             session.commit()
         return render_template('checkout.html',key=stripe_keys['publishable_key'],order=order,user=user)
     else:
-        return render_template('truckPage.html', items = items.all())
+        items = items.all()
+        items = filter(lambda x: x.count > 0, items)
+        return render_template('truckPage.html', items = items)
 
 
 @app.route('/orders/<truck>', methods=['GET','POST'])
@@ -90,6 +92,7 @@ def order_page(truck):
             dbobject = session.query(Order).filter(Order.id == int(serve)).first()
             dbobject.status = 'complete'
             session.commit()
+            open_orders = session.query(Order).filter(Order.status=='paid').all()
         return render_template('line.html', orders = open_orders)
     else:
         return render_template('line.html', orders = open_orders)
@@ -97,7 +100,7 @@ def order_page(truck):
 #index
 @app.route('/')
 def index():
-    operators = [instance for instance in session.query(Operator)]
+    operators = [instance for instance in session.query(Operator) if instance.open == True] 
     return render_template('index.html',trucks = operators)
 
 
