@@ -25,6 +25,11 @@ SessionMkr.configure(bind=engine)
 session = SessionMkr()
 
 app = Flask(__name__)
+# Robots.txt
+@app.route('/robots.txt')
+def robots():
+    return render_template('robots.txt')
+
 # Checkout Stuff
 @app.route('/checkout')
 def checkout(amount):
