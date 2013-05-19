@@ -90,6 +90,7 @@ def truck_page(truck):
 #Truck Admin Stuff
 
 @app.route('/orders/<truck>', methods=['GET','POST'])
+@requires_auth
 def order_page(truck):
     open_orders = session.query(Order).filter(Order.status=='paid').all()
     if request.method == 'POST':
