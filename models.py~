@@ -4,6 +4,7 @@ from sqlalchemy.ext.declarative import *
 #from hello import engine, session
 
 engine = create_engine("mysql://root:@localhost/Truckate")
+
 Session = sessionmaker()
 Session.configure(bind=engine)
 session = Session()
